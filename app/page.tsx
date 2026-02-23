@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { CategoryPreview } from "@/components/category-preview";
@@ -73,23 +74,36 @@ export default function HomePage() {
             {featured.map((article) => (
               <article
                 key={article.slug}
-                className="rounded-sm border border-slate-700 bg-slate-900 p-6 shadow-paper transition-shadow hover:shadow-lg"
+                className="group overflow-hidden rounded-sm border border-slate-700 bg-slate-900 shadow-paper transition-shadow hover:shadow-lg"
               >
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-champagne/60">
-                  {article.researchType}
-                </p>
-                <h3 className="mt-3 font-serif text-2xl text-slate-100">
-                  {article.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-400">
-                  {article.summary}
-                </p>
-                <Link
-                  href={`/research/${article.slug}`}
-                  className="mt-5 inline-block text-sm text-champagne hover:underline"
-                >
-                  Read article
-                </Link>
+                {article.thumbnail && (
+                  <div className="relative h-48 w-full overflow-hidden border-b border-slate-700">
+                    <Image
+                      src={article.thumbnail}
+                      alt={article.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
+                  </div>
+                )}
+                <div className="p-6">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-champagne/60">
+                    {article.researchType}
+                  </p>
+                  <h3 className="mt-3 font-serif text-2xl text-slate-100">
+                    {article.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                    {article.summary}
+                  </p>
+                  <Link
+                    href={`/research/${article.slug}`}
+                    className="mt-5 inline-block text-sm text-champagne hover:underline"
+                  >
+                    Read article
+                  </Link>
+                </div>
               </article>
             ))}
           </div>

@@ -20,10 +20,10 @@ type Citation = {
 // ─── Suggested prompts shown in the empty state ───────────────────────────────
 
 const SUGGESTED_PROMPTS = [
-  "What's the investment thesis on Symbotic?",
-  "Explain the DCF valuation methodology in the Symbotic report",
-  "What are the key risks identified in recent research?",
-  "How does the Walmart partnership affect the Symbotic bull case?",
+  "What's the investment thesis on Alphabet?",
+  "Explain the DCF valuation for Amazon's infrastructure cycle",
+  "What are the key risks identified in the gold thesis?",
+  "How does Google Cloud's backlog support the bull case?",
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

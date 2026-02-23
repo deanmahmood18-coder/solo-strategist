@@ -6,7 +6,7 @@ import { researchArticles } from "@/data/research";
 
 export function FeaturedInsight() {
   const article =
-    researchArticles.find((a) => a.slug === "amazon-infrastructure-harvesting-cycle") ??
+    researchArticles.find((a) => a.slug === "alphabet-compounding-intelligence-engine") ??
     researchArticles[0];
   if (!article) return null;
 

@@ -29,6 +29,7 @@ const FALLBACK: MarketQuote[] = [
   { symbol: "BNO",    label: "Brent Crude",   price: 25.73,   change: -0.42,  changePercent: -1.61 },
   { symbol: "GOOGL",  label: "Alphabet",      price: 199.36,  change: 1.22,   changePercent: 0.41 },
   { symbol: "AMZN",   label: "Amazon",        price: 198.79,  change: -0.54,  changePercent: -0.27 },
+  { symbol: "IGLN.L", label: "Gold (IGLN.L)", price: 100.79,  change: 0.52,   changePercent: 0.52 },
 ];
 
 let cache: { data: MarketQuote[]; ts: number } | null = null;
