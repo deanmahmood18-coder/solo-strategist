@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FileSearch, BookOpen } from "lucide-react";
+import { FileSearch, Shield, Zap, BarChart3 } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -12,6 +12,10 @@ export type Citation = {
   sectionHeading?: string;
   url: string;
   score: number;
+  /** Semantic relevance to the portfolio query. */
+  reasoningRelevance?: "direct" | "thematic" | "contextual";
+  /** Which portfolio tickers this source is most relevant to. */
+  relevantTickers?: string[];
 };
 
 interface AuditReportProps {
@@ -22,7 +26,6 @@ interface AuditReportProps {
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-/** Three-dot pulsing indicator shown while streaming. */
 function TypingIndicator() {
   return (
     <div className="flex items-center gap-1 px-1 py-1">
@@ -37,10 +40,23 @@ function TypingIndicator() {
   );
 }
 
+/** Colour coding for reasoning relevance badges. */
+const RELEVANCE_STYLES: Record<string, string> = {
+  direct: "border-emerald-700/50 bg-emerald-950/30 text-emerald-400",
+  thematic: "border-champagne/30 bg-champagne/5 text-champagne/70",
+  contextual: "border-slate-700/50 bg-slate-900/50 text-slate-500",
+};
+
+const RELEVANCE_ICONS: Record<string, typeof Shield> = {
+  direct: Shield,
+  thematic: Zap,
+  contextual: BarChart3,
+};
+
 /**
  * Splits text on [N] citation markers and returns React nodes.
- * Each citation becomes a clickable champagne badge with a smart hover tooltip
- * showing the source title and section (Contextual Deep-Linking improvement).
+ * Citation badges are colour-coded by reasoning relevance and show
+ * smart hover tooltips with source title, section, and relevance.
  */
 function renderWithCitations(text: string, citations: Citation[]): React.ReactNode[] {
   const parts = text.split(/(\[\d+\])/g);
@@ -50,15 +66,21 @@ function renderWithCitations(text: string, citations: Citation[]): React.ReactNo
       const idx = parseInt(match[1], 10);
       const citation = citations.find((c) => c.index === idx);
       if (citation) {
-        const tooltip = citation.sectionHeading
-          ? `${citation.title} — ${citation.sectionHeading}`
-          : citation.title;
+        const relevance = citation.reasoningRelevance ?? "contextual";
+        const tooltipParts = [citation.title];
+        if (citation.sectionHeading) tooltipParts.push(`Section: ${citation.sectionHeading}`);
+        tooltipParts.push(`Relevance: ${relevance.toUpperCase()}`);
+        if (citation.relevantTickers?.length) {
+          tooltipParts.push(`Applies to: ${citation.relevantTickers.join(", ")}`);
+        }
+        const tooltip = tooltipParts.join(" | ");
+
         return (
           <Link
             key={i}
             href={`/research/${citation.slug}`}
             title={tooltip}
-            className="inline-flex items-center rounded-sm border border-champagne/40 bg-champagne/10 px-1 py-0 text-[10px] font-semibold leading-5 text-champagne no-underline transition-colors hover:bg-champagne/20 align-baseline"
+            className={`inline-flex items-center rounded-sm border px-1 py-0 text-[10px] font-semibold leading-5 no-underline transition-colors hover:opacity-80 align-baseline ${RELEVANCE_STYLES[relevance]}`}
           >
             [{idx}]
           </Link>
@@ -70,8 +92,40 @@ function renderWithCitations(text: string, citations: Citation[]): React.ReactNo
 }
 
 /**
+ * Detects and renders the Conviction Alignment Score as a visual gauge.
+ */
+function ConvictionGauge({ score }: { score: number }) {
+  let colour: string;
+  let label: string;
+  if (score >= 75) {
+    colour = "text-emerald-400 border-emerald-700/50 bg-emerald-950/20";
+    label = "High Alignment";
+  } else if (score >= 50) {
+    colour = "text-champagne border-champagne/30 bg-champagne/5";
+    label = "Moderate Alignment";
+  } else if (score >= 25) {
+    colour = "text-amber-400 border-amber-700/50 bg-amber-950/20";
+    label = "Low Alignment";
+  } else {
+    colour = "text-rose-400 border-rose-700/50 bg-rose-950/20";
+    label = "Misaligned";
+  }
+
+  return (
+    <div className={`inline-flex items-center gap-2 rounded-sm border px-3 py-1.5 ${colour}`}>
+      <span className="text-lg font-bold">{score}</span>
+      <div>
+        <p className="text-[10px] font-semibold uppercase tracking-wider">/100</p>
+        <p className="text-[9px] opacity-70">{label}</p>
+      </div>
+    </div>
+  );
+}
+
+/**
  * Parses streaming text into rendered React nodes.
- * ### headings get a champagne accent line; body text runs through renderWithCitations.
+ * ### headings get champagne accent lines; body runs through renderWithCitations.
+ * Special handling for "Conviction Alignment Score: X/100" pattern.
  */
 function renderReport(text: string, citations: Citation[]): React.ReactNode[] {
   const lines = text.split("\n");
@@ -82,11 +136,40 @@ function renderReport(text: string, citations: Citation[]): React.ReactNode[] {
   const flushBuffer = () => {
     const content = buffer.join(" ").trim();
     if (content) {
-      nodes.push(
-        <p key={key++} className="text-sm leading-7 text-slate-300">
-          {renderWithCitations(content, citations)}
-        </p>
-      );
+      // Check for Conviction Alignment Score pattern
+      const scoreMatch = content.match(/\*\*Conviction Alignment Score:\s*(\d+)\/100\*\*/);
+      if (scoreMatch) {
+        const score = parseInt(scoreMatch[1], 10);
+        // Render the gauge, then the rest of the paragraph
+        const before = content.slice(0, scoreMatch.index).trim();
+        const after = content.slice((scoreMatch.index ?? 0) + scoreMatch[0].length).trim();
+
+        if (before) {
+          nodes.push(
+            <p key={key++} className="text-sm leading-7 text-slate-300">
+              {renderWithCitations(before, citations)}
+            </p>
+          );
+        }
+        nodes.push(
+          <div key={key++} className="my-3">
+            <ConvictionGauge score={score} />
+          </div>
+        );
+        if (after) {
+          nodes.push(
+            <p key={key++} className="text-sm leading-7 text-slate-300">
+              {renderWithCitations(after, citations)}
+            </p>
+          );
+        }
+      } else {
+        nodes.push(
+          <p key={key++} className="text-sm leading-7 text-slate-300">
+            {renderWithCitations(content, citations)}
+          </p>
+        );
+      }
     }
     buffer = [];
   };
@@ -117,7 +200,7 @@ function renderReport(text: string, citations: Citation[]): React.ReactNode[] {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export function AuditReport({ text, citations, status }: AuditReportProps) {
-  // Empty state — no audit run yet
+  // Empty state
   if (status === "idle") {
     return (
       <div className="flex h-full min-h-[480px] flex-col items-center justify-center gap-4 rounded-sm border border-slate-800 bg-slate-900/30 p-10">
@@ -132,20 +215,25 @@ export function AuditReport({ text, citations, status }: AuditReportProps) {
     );
   }
 
-  // Loading state — before streaming begins
+  // Loading state
   if (status === "loading") {
     return (
       <div className="flex h-full min-h-[480px] flex-col items-center justify-center gap-3 rounded-sm border border-slate-800 bg-slate-900/30 p-10">
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-champagne/60">
-          Portfolio Auditor
+          Portfolio Auditor v2
         </p>
         <p className="text-xs text-slate-500">
-          Fetching live prices &amp; querying research corpus…
+          Fetching live prices · Embedding query · Querying research corpus · Computing conviction scores…
         </p>
         <TypingIndicator />
       </div>
     );
   }
+
+  // Count relevance distribution
+  const directCount = citations.filter((c) => c.reasoningRelevance === "direct").length;
+  const thematicCount = citations.filter((c) => c.reasoningRelevance === "thematic").length;
+  const contextualCount = citations.filter((c) => c.reasoningRelevance === "contextual").length;
 
   return (
     <div className="rounded-sm border border-slate-800 bg-slate-900/30 p-6 md:p-8">
@@ -156,8 +244,16 @@ export function AuditReport({ text, citations, status }: AuditReportProps) {
             Portfolio Auditor
           </p>
           <p className="mt-0.5 text-[10px] text-slate-600">
-            Grounded in Solo Strategist research ·{" "}
-            {citations.length} source{citations.length !== 1 ? "s" : ""}
+            Deep thesis synthesis · {citations.length} source{citations.length !== 1 ? "s" : ""}
+            {directCount > 0 && (
+              <span className="ml-1.5 text-emerald-500/60">{directCount} direct</span>
+            )}
+            {thematicCount > 0 && (
+              <span className="ml-1.5 text-champagne/40">{thematicCount} thematic</span>
+            )}
+            {contextualCount > 0 && (
+              <span className="ml-1.5 text-slate-600">{contextualCount} contextual</span>
+            )}
           </p>
         </div>
         <div>
@@ -173,30 +269,50 @@ export function AuditReport({ text, citations, status }: AuditReportProps) {
       {/* Report body */}
       <div className="space-y-3">{renderReport(text, citations)}</div>
 
-      {/* Source cards — shown once streaming is complete */}
+      {/* Source cards — shown once streaming is complete, grouped by relevance */}
       {citations.length > 0 && status === "done" && (
         <div className="mt-8 border-t border-slate-800 pt-6">
           <p className="mb-2.5 text-[10px] font-medium uppercase tracking-[0.13em] text-slate-700">
             Sources
           </p>
           <div className="flex flex-wrap gap-1.5">
-            {citations.map((c) => (
-              <Link
-                key={c.index}
-                href={`/research/${c.slug}`}
-                title={c.sectionHeading ? `${c.title} — ${c.sectionHeading}` : c.title}
-                className="inline-flex items-center gap-1.5 rounded-sm border border-slate-700/80 bg-slate-900 px-2.5 py-1.5 text-[10px] text-slate-400 no-underline transition-colors hover:border-slate-600 hover:text-slate-300"
-              >
-                <BookOpen className="h-2.5 w-2.5 shrink-0 text-champagne/40" />
-                <span>
-                  <span className="text-champagne/60">[{c.index}]</span>{" "}
-                  {c.title}
-                  {c.sectionHeading && (
-                    <span className="ml-1 text-slate-600">— {c.sectionHeading}</span>
-                  )}
-                </span>
-              </Link>
-            ))}
+            {citations
+              .sort((a, b) => {
+                const order = { direct: 0, thematic: 1, contextual: 2 };
+                return (order[a.reasoningRelevance ?? "contextual"] ?? 2) -
+                  (order[b.reasoningRelevance ?? "contextual"] ?? 2);
+              })
+              .map((c) => {
+                const relevance = c.reasoningRelevance ?? "contextual";
+                const RelevanceIcon = RELEVANCE_ICONS[relevance] ?? BarChart3;
+                const tooltipParts = [c.title];
+                if (c.sectionHeading) tooltipParts.push(c.sectionHeading);
+                tooltipParts.push(`${relevance} relevance`);
+                if (c.relevantTickers?.length) tooltipParts.push(`tickers: ${c.relevantTickers.join(", ")}`);
+
+                return (
+                  <Link
+                    key={c.index}
+                    href={`/research/${c.slug}`}
+                    title={tooltipParts.join(" — ")}
+                    className={`inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1.5 text-[10px] no-underline transition-colors hover:opacity-80 ${RELEVANCE_STYLES[relevance]}`}
+                  >
+                    <RelevanceIcon className="h-2.5 w-2.5 shrink-0 opacity-60" />
+                    <span>
+                      <span className="opacity-60">[{c.index}]</span>{" "}
+                      {c.title}
+                      {c.sectionHeading && (
+                        <span className="ml-1 opacity-50">— {c.sectionHeading}</span>
+                      )}
+                    </span>
+                    {c.relevantTickers && c.relevantTickers.length > 0 && (
+                      <span className="ml-1 opacity-40">
+                        ({c.relevantTickers.join(", ")})
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
           </div>
         </div>
       )}
