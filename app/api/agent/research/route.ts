@@ -146,15 +146,34 @@ export async function POST(req: NextRequest) {
   let userText = "";
 
   if (Array.isArray(rawBody.messages)) {
-    // v6 useChat format: messages are UIMessage objects with a `parts` array
+    // useChat format: UIMessage objects — support both `parts` (AI SDK v4+)
+    // and `content` (string, older SDK versions) so we degrade gracefully.
     type Part = { type: string; text?: string };
-    type UIMsgRaw = { role: string; parts?: Part[] };
+    type UIMsgRaw = { role: string; parts?: Part[]; content?: unknown };
     const msgs = rawBody.messages as UIMsgRaw[];
     const lastUser = [...msgs].reverse().find((m) => m.role === "user");
-    userText = (lastUser?.parts ?? [])
-      .filter((p): p is Part & { type: "text"; text: string } => p.type === "text" && typeof p.text === "string")
-      .map((p) => p.text)
-      .join("");
+
+    if (lastUser) {
+      if (Array.isArray(lastUser.parts) && lastUser.parts.length > 0) {
+        // Preferred: parts array with typed text parts
+        userText = lastUser.parts
+          .filter((p): p is Part & { type: "text"; text: string } =>
+            p.type === "text" && typeof p.text === "string"
+          )
+          .map((p) => p.text)
+          .join("");
+      } else if (typeof lastUser.content === "string") {
+        // Fallback: content as plain string (older SDK format)
+        userText = lastUser.content;
+      } else if (Array.isArray(lastUser.content)) {
+        // Fallback: content as content-part array
+        type ContentPart = { type: string; text?: string };
+        userText = (lastUser.content as ContentPart[])
+          .filter((p) => p.type === "text" && typeof p.text === "string")
+          .map((p) => p.text ?? "")
+          .join("");
+      }
+    }
   } else if (typeof rawBody.message === "string") {
     // Legacy direct format: { message: string }
     userText = rawBody.message;
@@ -208,13 +227,22 @@ export async function POST(req: NextRequest) {
     : "";
 
   // 6. Stream the response
-  const result = streamText({
-    model: anthropic("claude-sonnet-4-6"),
-    system: buildSystemPrompt(contextBlock),
-    messages: [{ role: "user", content: trimmed + priceContext }],
-    maxOutputTokens: 1200,
-    temperature: 0.3,
-  });
+  let result;
+  try {
+    result = streamText({
+      model: anthropic("claude-sonnet-4-6"),
+      system: buildSystemPrompt(contextBlock),
+      messages: [{ role: "user", content: trimmed + priceContext }],
+      maxOutputTokens: 1200,
+      temperature: 0.3,
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unknown error";
+    return new Response(JSON.stringify({ error: `Model unavailable: ${msg}` }), {
+      status: 502,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 
   // 7. Return a plain text stream with citations in a custom header.
   //    toTextStreamResponse() is consumed by TextStreamChatTransport on the client.
