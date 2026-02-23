@@ -34,6 +34,12 @@ yarn-error.log*
 *.swp
 *.swo
 
+# Claude Code
+.claude/
+
+# Cloudflare
+.wrangler/
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
