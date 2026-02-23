@@ -63,6 +63,10 @@ const navGroups: NavGroup[] = [
     label: "Library",
     href: "/library",
   },
+  {
+    label: "Auditor",
+    href: "/auditor",
+  },
 ];
 
 /* ── Navbar component ─────────────────────────────────────── */
