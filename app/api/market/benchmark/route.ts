@@ -8,18 +8,18 @@ type BenchmarkPoint = {
 };
 
 const FALLBACK: BenchmarkPoint[] = [
-  { month: "Mar 25", sp500: 100 },
-  { month: "Apr",    sp500: 101 },
-  { month: "May",    sp500: 103 },
-  { month: "Jun",    sp500: 104 },
-  { month: "Jul",    sp500: 106 },
-  { month: "Aug",    sp500: 107 },
-  { month: "Sep",    sp500: 105 },
-  { month: "Oct",    sp500: 108 },
-  { month: "Nov",    sp500: 110 },
-  { month: "Dec",    sp500: 111 },
-  { month: "Jan 26", sp500: 112 },
-  { month: "Feb",    sp500: 114 },
+  { month: "Mar 25", sp500: 100.0 },
+  { month: "Apr",    sp500: 99.1  },
+  { month: "May",    sp500: 105.4 },
+  { month: "Jun",    sp500: 110.8 },
+  { month: "Jul",    sp500: 113.3 },
+  { month: "Aug",    sp500: 115.1 },
+  { month: "Sep",    sp500: 119.6 },
+  { month: "Oct",    sp500: 121.1 },
+  { month: "Nov",    sp500: 121.2 },
+  { month: "Dec",    sp500: 123.0 },
+  { month: "Jan 26", sp500: 124.7 },
+  { month: "Feb",    sp500: 124.3 },
 ];
 
 let cache: { data: BenchmarkPoint[]; ts: number } | null = null;

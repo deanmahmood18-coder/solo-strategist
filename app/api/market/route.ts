@@ -11,23 +11,24 @@ type MarketQuote = {
 };
 
 const INSTRUMENTS = [
-  { finnhub: "SPY",   label: "S&P 500" },
-  { finnhub: "EWU",   label: "FTSE 100" },
-  { finnhub: "EWJ",   label: "Nikkei 225" },
-  { finnhub: "GLD",   label: "Gold" },
-  { finnhub: "BNO",   label: "Brent Crude" },
-  { finnhub: "GOOGL", label: "Alphabet" },
-  { finnhub: "AMZN",  label: "Amazon" },
+  { finnhub: "SPY",        label: "S&P 500",    symbol: "SPY" },
+  { finnhub: "EWU",        label: "FTSE 100",   symbol: "EWU" },
+  { finnhub: "EWJ",        label: "Nikkei 225", symbol: "EWJ" },
+  { finnhub: "GLD",        label: "Gold (GLD)", symbol: "GLD" },
+  { finnhub: "IGLN:XLON",  label: "Gold (IGLN.L)", symbol: "IGLN.L" },
+  { finnhub: "BNO",        label: "Brent Crude", symbol: "BNO" },
+  { finnhub: "GOOGL",      label: "Alphabet",   symbol: "GOOGL" },
+  { finnhub: "AMZN",       label: "Amazon",     symbol: "AMZN" },
 ];
 
 const FALLBACK: MarketQuote[] = [
-  { symbol: "SPY",   label: "S&P 500",    price: 6021.47, change: 23.18,  changePercent: 0.39 },
-  { symbol: "EWU",   label: "FTSE 100",   price: 38.12,   change: -0.09,  changePercent: -0.24 },
-  { symbol: "EWJ",   label: "Nikkei 225", price: 69.84,   change: 0.67,   changePercent: 0.97 },
-  { symbol: "GLD",   label: "Gold",       price: 189.52,  change: 1.85,   changePercent: 0.99 },
-  { symbol: "BNO",   label: "Brent Crude",price: 25.73,   change: -0.42,  changePercent: -1.61 },
-  { symbol: "GOOGL", label: "Alphabet",   price: 199.36,  change: 1.22,   changePercent: 0.41 },
-  { symbol: "AMZN",  label: "Amazon",     price: 198.79,  change: -0.54,  changePercent: -0.27 },
+  { symbol: "SPY",    label: "S&P 500",       price: 6021.47, change: 23.18,  changePercent: 0.39 },
+  { symbol: "EWU",    label: "FTSE 100",      price: 38.12,   change: -0.09,  changePercent: -0.24 },
+  { symbol: "EWJ",    label: "Nikkei 225",    price: 69.84,   change: 0.67,   changePercent: 0.97 },
+  { symbol: "GLD",    label: "Gold (GLD)",    price: 473.08,  change: 4.44,   changePercent: 0.95 },
+  { symbol: "BNO",    label: "Brent Crude",   price: 25.73,   change: -0.42,  changePercent: -1.61 },
+  { symbol: "GOOGL",  label: "Alphabet",      price: 199.36,  change: 1.22,   changePercent: 0.41 },
+  { symbol: "AMZN",   label: "Amazon",        price: 198.79,  change: -0.54,  changePercent: -0.27 },
 ];
 
 let cache: { data: MarketQuote[]; ts: number } | null = null;
@@ -57,7 +58,7 @@ export async function GET() {
         if (!data.c || data.c === 0) throw new Error("No price data");
 
         return {
-          symbol: inst.finnhub,
+          symbol: inst.symbol,
           label: inst.label,
           price: data.c,
           change: data.d ?? 0,

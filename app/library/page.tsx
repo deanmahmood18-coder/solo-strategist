@@ -25,6 +25,7 @@ const books: LibraryItem[] = [
     typeLabel: "Book",
     snippet:
       "The foundational text on value discipline. Graham\u2019s concept of \u201Cmargin of safety\u201D remains the single most important principle in our allocation framework \u2014 every position we size begins with this filter.",
+    href: "https://www.amazon.com/Intelligent-Investor-Definitive-Investing-Essentials/dp/0060555661",
   },
   {
     title: "Antifragile",
@@ -32,6 +33,7 @@ const books: LibraryItem[] = [
     typeLabel: "Book",
     snippet:
       "Taleb\u2019s thesis that certain systems gain from disorder underpins our barbell construction: pair deep-value convictions with asymmetric optionality, and let volatility work for you rather than against you.",
+    href: "https://www.amazon.com/Antifragile-Things-That-Gain-Disorder/dp/0812979680",
   },
 ];
 
@@ -77,6 +79,7 @@ const pulse: LibraryItem[] = [
     typeLabel: "Podcast",
     snippet:
       "Tracy Alloway and Joe Weisenthal consistently surface the non-obvious corners of markets \u2014 plumbing, structure, and flow mechanics that move price before narrative catches up.",
+    href: "https://www.bloomberg.com/podcasts/odd-lots",
   },
   {
     title: "The Compound and Friends",
@@ -84,6 +87,7 @@ const pulse: LibraryItem[] = [
     typeLabel: "Podcast",
     snippet:
       "Josh Brown and Michael Batnick provide real-time practitioner perspective. Useful for calibrating sentiment and understanding what the advisory channel is seeing.",
+    href: "https://www.youtube.com/@TheCompoundNews",
   },
   {
     title: "Money Stuff",
@@ -91,6 +95,7 @@ const pulse: LibraryItem[] = [
     typeLabel: "Newsletter",
     snippet:
       "The single best daily read in financial media. Levine\u2019s ability to distil complex corporate finance, M&A, and regulatory events into clear prose is unmatched.",
+    href: "https://www.bloomberg.com/account/newsletters/money-stuff",
   },
   {
     title: "Grant\u2019s Interest Rate Observer",
@@ -98,6 +103,7 @@ const pulse: LibraryItem[] = [
     typeLabel: "Newsletter",
     snippet:
       "Contrarian credit analysis at its finest. Grant\u2019s long-form work on interest rate cycles and credit quality is an essential counterweight to consensus optimism.",
+    href: "https://www.grantspub.com",
   },
 ];
 

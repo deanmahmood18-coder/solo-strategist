@@ -31,7 +31,11 @@ function computeStats() {
 }
 
 export default function HomePage() {
-  const featured = researchArticles.slice(0, 2);
+  const FEATURED_SLUGS = ["amazon-infrastructure-harvesting-cycle", "gold-6100-price-target"];
+  const featured = FEATURED_SLUGS.flatMap((slug) => {
+    const a = researchArticles.find((r) => r.slug === slug);
+    return a ? [a] : [];
+  });
   const { winRate, avgOutperformance } = computeStats();
 
   return (

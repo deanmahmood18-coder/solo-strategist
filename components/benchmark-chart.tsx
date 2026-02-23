@@ -49,7 +49,7 @@ export function BenchmarkChart() {
       xKey="month"
       dataKey="strategist"
       benchmarkKey="sp500"
-      metricNarrative="The Solo Strategist model portfolio has outperformed the S&P 500 by 21 points since inception (March 2025), with a max drawdown of just 4.2% during the September correction."
+      metricNarrative="The Solo Strategist model portfolio has outperformed the S&P 500 by 11 points since inception (March 2025), generating a 35% total return against the benchmark's 24.3%."
     />
   );
 }

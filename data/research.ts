@@ -23,7 +23,7 @@ export const researchArticles: ResearchArticle[] = [
     category: "Equities",
     researchType: "EQUITY DEEP DIVE",
     publishedAt: "2026-02-17",
-    pdfUrl: "/research/Symbotic/SOLO STRATEGISTfinal.pdf",
+    pdfUrl: "/research/Symbotic/SOLO%20STRATEGISTfinal.pdf",
     dashboardUrl: "/research/symbotic/dashboard",
     thumbnail: "/research/Symbotic/thumbnail.png",
     readingTime: "15 min read",

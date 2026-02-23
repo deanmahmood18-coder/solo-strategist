@@ -17,16 +17,6 @@ export type TrackRecordItem = {
 
 export const trackRecordData: TrackRecordItem[] = [
   {
-    prediction: "Symbotic - The Automation Backbone of Commerce",
-    ticker: "SYM",
-    datePublished: "2026-02-17",
-    entryPrice: 55.0,
-    currentPrice: 55.81,
-    benchmarkReturn: 2.1,
-    status: "Pending",
-    thesisStatus: "Pending",
-  },
-  {
     prediction: "Amazon - Infrastructure Harvesting Cycle",
     ticker: "AMZN",
     datePublished: "2026-02-16",
@@ -48,13 +38,13 @@ export const trackRecordData: TrackRecordItem[] = [
   },
   {
     prediction: "Gold - The $6,100 Thesis",
-    ticker: "XAU",
+    ticker: "GLD",
     datePublished: "2026-02-19",
-    entryPrice: 4704.05,
-    currentPrice: 4704.05,
-    benchmarkReturn: 0,
+    entryPrice: 455.32,
+    currentPrice: 473.08,
+    benchmarkReturn: 0.8,
     status: "Pending",
-    thesisStatus: "Pending",
+    thesisStatus: "Playing Out",
   },
   {
     prediction: "North American Midstream Re-Rating",
@@ -66,15 +56,6 @@ export const trackRecordData: TrackRecordItem[] = [
     thesisStatus: "Playing Out",
   },
   {
-    prediction: "Payment Infrastructure Margin Expansion",
-    datePublished: "2025-07-10",
-    entryPrice: 88.9,
-    currentPrice: 95.1,
-    benchmarkReturn: 9.1,
-    status: "Pending",
-    thesisStatus: "Playing Out",
-  },
-  {
     prediction: "Industrial Copper Demand Overshoot",
     datePublished: "2024-11-30",
     entryPrice: 31.7,
@@ -82,15 +63,6 @@ export const trackRecordData: TrackRecordItem[] = [
     benchmarkReturn: 18.2,
     status: "Wrong",
     thesisStatus: "Broken - Exited",
-  },
-  {
-    prediction: "European Grid Modernisation Basket",
-    datePublished: "2025-03-14",
-    entryPrice: 52.4,
-    currentPrice: 71.3,
-    benchmarkReturn: 12.5,
-    status: "Correct",
-    thesisStatus: "Playing Out",
   },
   {
     prediction: "Selective HY Credit Compression",
