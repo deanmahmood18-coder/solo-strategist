@@ -41,7 +41,7 @@ export const trackRecordData: TrackRecordItem[] = [
     ticker: "IGLN.L",
     datePublished: "2026-02-18",
     entryPrice: 93.93,
-    currentPrice: 100.79,
+    currentPrice: 97.98,
     benchmarkReturn: 0.8,
     status: "Pending",
     thesisStatus: "Playing Out",

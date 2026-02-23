@@ -4,13 +4,13 @@ export const forecastPerformance = [
   { month: "May",    strategist: 109, sp500: 105.4 },
   { month: "Jun",    strategist: 112, sp500: 110.8 },
   { month: "Jul",    strategist: 116, sp500: 113.3 },
-  { month: "Aug",    strategist: 119, sp500: 115.1 },
-  { month: "Sep",    strategist: 114, sp500: 119.6 },
-  { month: "Oct",    strategist: 118, sp500: 121.1 },
-  { month: "Nov",    strategist: 124, sp500: 121.2 },
+  { month: "Aug",    strategist: 119, sp500: 115.7 },
+  { month: "Sep",    strategist: 114, sp500: 119.8 },
+  { month: "Oct",    strategist: 118, sp500: 122.6 },
+  { month: "Nov",    strategist: 124, sp500: 122.9 },
   { month: "Dec",    strategist: 128, sp500: 123.0 },
-  { month: "Jan 26", strategist: 131, sp500: 124.7 },
-  { month: "Feb",    strategist: 135, sp500: 124.3 },
+  { month: "Jan 26", strategist: 131, sp500: 124.8 },
+  { month: "Feb",    strategist: 135, sp500: 123.1 },
 ];
 
 export const hitRateSeries = [

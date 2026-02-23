@@ -22,14 +22,14 @@ const INSTRUMENTS = [
 ];
 
 const FALLBACK: MarketQuote[] = [
-  { symbol: "SPY",    label: "S&P 500",       price: 6021.47, change: 23.18,  changePercent: 0.39 },
+  { symbol: "SPY",    label: "S&P 500",       price: 682.39,  change: -7.04,  changePercent: -1.02 },
   { symbol: "EWU",    label: "FTSE 100",      price: 38.12,   change: -0.09,  changePercent: -0.24 },
   { symbol: "EWJ",    label: "Nikkei 225",    price: 69.84,   change: 0.67,   changePercent: 0.97 },
-  { symbol: "GLD",    label: "Gold (GLD)",    price: 473.08,  change: 4.44,   changePercent: 0.95 },
+  { symbol: "GLD",    label: "Gold (GLD)",    price: 481.28,  change: 12.66,  changePercent: 2.70 },
   { symbol: "BNO",    label: "Brent Crude",   price: 25.73,   change: -0.42,  changePercent: -1.61 },
   { symbol: "GOOGL",  label: "Alphabet",      price: 199.36,  change: 1.22,   changePercent: 0.41 },
   { symbol: "AMZN",   label: "Amazon",        price: 198.79,  change: -0.54,  changePercent: -0.27 },
-  { symbol: "IGLN.L", label: "Gold (IGLN.L)", price: 100.79,  change: 0.52,   changePercent: 0.52 },
+  { symbol: "IGLN.L", label: "Gold (IGLN.L)", price: 97.98,   change: 0.88,   changePercent: 0.91 },
 ];
 
 let cache: { data: MarketQuote[]; ts: number } | null = null;

@@ -13,13 +13,13 @@ const FALLBACK: BenchmarkPoint[] = [
   { month: "May",    sp500: 105.4 },
   { month: "Jun",    sp500: 110.8 },
   { month: "Jul",    sp500: 113.3 },
-  { month: "Aug",    sp500: 115.1 },
-  { month: "Sep",    sp500: 119.6 },
-  { month: "Oct",    sp500: 121.1 },
-  { month: "Nov",    sp500: 121.2 },
+  { month: "Aug",    sp500: 115.7 },
+  { month: "Sep",    sp500: 119.8 },
+  { month: "Oct",    sp500: 122.6 },
+  { month: "Nov",    sp500: 122.9 },
   { month: "Dec",    sp500: 123.0 },
-  { month: "Jan 26", sp500: 124.7 },
-  { month: "Feb",    sp500: 124.3 },
+  { month: "Jan 26", sp500: 124.8 },
+  { month: "Feb",    sp500: 123.1 },
 ];
 
 let cache: { data: BenchmarkPoint[]; ts: number } | null = null;

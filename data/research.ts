@@ -23,9 +23,9 @@ export const researchArticles: ResearchArticle[] = [
     category: "Equities",
     researchType: "EQUITY DEEP DIVE",
     publishedAt: "2026-02-17",
-    pdfUrl: "/research/Symbotic/SOLO%20STRATEGISTfinal.pdf",
+    pdfUrl: "/research/symbotic/symbotic-report.pdf",
     dashboardUrl: "/research/symbotic/dashboard",
-    thumbnail: "/research/Symbotic/thumbnail.png",
+    thumbnail: "/research/symbotic/thumbnail.png",
     readingTime: "15 min read",
     summary:
       "Symbotic Inc. (NASDAQ: SYM) is the AI-enabled robotics leader transforming warehouse logistics for the world\u2019s largest retailers. With Q1 FY2026 revenue of $630 million (+29% YoY), a $22.3 billion backlog anchored by a 12-year Walmart partnership, and first-time GAAP profitability, the business is exceptional \u2014 but at ~$55 per share and ~14x forward revenue, our normalised DCF suggests a base-case intrinsic value of approximately $20. This dual-horizon report also examines the Symbiotic Protocol ticker collision risk that creates both unwarranted volatility and potential mean-reversion entry opportunities.",
@@ -83,7 +83,7 @@ export const researchArticles: ResearchArticle[] = [
     category: "Equities",
     researchType: "EQUITY DEEP DIVE",
     publishedAt: "2026-02-16",
-    pdfUrl: "/research/amazon/Amazon16:02:2026.pdf",
+    pdfUrl: "/research/amazon/amazon-report.pdf",
     thumbnail: "/research/amazon/figure-1-valuation.png",
     readingTime: "14 min read",
     summary:
@@ -160,7 +160,7 @@ export const researchArticles: ResearchArticle[] = [
     category: "Equities",
     researchType: "EQUITY DEEP DIVE",
     publishedAt: "2026-02-16",
-    pdfUrl: "/research/alphabet/Alphabet16:02:2026.pdf",
+    pdfUrl: "/research/alphabet/alphabet-report.pdf",
     thumbnail: "/research/alphabet/thumbnail.png",
     readingTime: "16 min read",
     summary:
@@ -213,8 +213,8 @@ export const researchArticles: ResearchArticle[] = [
     category: "Commodities",
     researchType: "COMMODITIES DEEP DIVE",
     publishedAt: "2026-02-19",
-    pdfUrl: "/research/GOLD/Gold_6100_Solo_Strategist.pdf",
-    thumbnail: "/research/GOLD/thumbnail.png",
+    pdfUrl: "/research/gold/gold-6100-thesis.pdf",
+    thumbnail: "/research/gold/thumbnail.png",
     readingTime: "12 min read",
     summary:
       "Gold is in the early innings of a structural re-rating cycle driven by sovereign debt monetisation, accelerating central bank accumulation, and the breakdown of the traditional dollar-gold inverse correlation. At $4,704 per troy ounce, our macro-anchored model targets $6,100 \u2014 a 30% upside predicated on de-dollarisation momentum, a plateau in real yields, and the systemic fragility of leveraged Western financial architecture.",
