@@ -45,7 +45,7 @@ export function TrackRecordTable() {
         if (!active) return;
         const prices: Record<string, number> = {};
         for (const q of data) {
-          if (q.symbol === "GOOGL" || q.symbol === "AMZN" || q.symbol === "GLD") {
+          if (q.symbol === "GOOGL" || q.symbol === "AMZN" || q.symbol === "IGLN.L") {
             prices[q.symbol] = q.price;
           }
         }

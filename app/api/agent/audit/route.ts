@@ -104,6 +104,12 @@ const THEMATIC_MAP: Record<string, ThematicExposure[]> = {
     { theme: "geopolitical-hedge", weight: 0.7, description: "Safe-haven bid during geopolitical risk events" },
     { theme: "usd-weakness", weight: 0.6, description: "Benefits from dollar depreciation" },
   ],
+  "IGLN.L": [
+    { theme: "gold-monetary-debasement", weight: 1.0, description: "iShares Physical Gold ETC; direct gold exposure via LSE-listed physically-backed ETC" },
+    { theme: "real-rates-sensitivity", weight: 0.9, description: "Inversely correlated with real rates; benefits from dovish rate path" },
+    { theme: "geopolitical-hedge", weight: 0.7, description: "Safe-haven bid during geopolitical risk events" },
+    { theme: "usd-weakness", weight: 0.6, description: "Benefits from dollar depreciation" },
+  ],
   SPY: [
     { theme: "us-equity-beta", weight: 1.0, description: "Broad US equity market exposure" },
     { theme: "us-consumer-logistics", weight: 0.3, description: "Indirect consumer exposure via index composition" },
