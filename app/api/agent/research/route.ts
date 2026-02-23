@@ -1,5 +1,4 @@
-// Node.js runtime required: Pinecone client uses node:stream internally.
-// The AI SDK streamText + embed calls are fully compatible with Node.js runtime.
+export const runtime = "edge";
 
 import { NextRequest } from "next/server";
 import { streamText, embed } from "ai";
