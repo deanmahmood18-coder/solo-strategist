@@ -10,7 +10,7 @@
 
 <br />
 
-> **The Solo Strategist** is an elite research ecosystem built to bridge the gap between retail accessibility and institutional-grade rigor. Unlike standard financial blogs, this platform functions as a live, transparent investment firm—deploying AI Vector Search and real-time data to turn static research into interactive intelligence.
+> **The Solo Strategist** is an elite research ecosystem built to bridge the gap between retail accessibility and institutional-grade rigour. Unlike standard financial blogs, this platform functions as a live, transparent investment firm by deploying AI Vector Search and real-time data to turn static research into interactive intelligence.
 
 ---
 
@@ -18,31 +18,31 @@
 
 ### 1. 📄 Research Publishing Engine
 * **Location:** `/research`, `components/article-layout.tsx`
-* **The Logic:** Moves away from opinion-based blog posts toward structured **Investment Memos**. Every thesis includes metadata, actionable takeaways, inline charts, and PDF attachments.
-* **The Value:** Signals professional credibility and a process-driven operation. The rigor of the analysis is structurally visible to the reader.
+* **The Logic:** Moves away from opinion-based blog posts towards structured **Investment Memos**. Every thesis includes metadata, actionable takeaways, inline charts, and PDF attachments.
+* **The Value:** Signals professional credibility and a process-driven operation. The rigour of the analysis is structurally visible to the reader.
 
 ### 2. ⚖️ Public Accountability System (The "Truth Layer")
 * **Location:** `/predictions`, `/archive/post-mortems`
 * **The Logic:** A real-time tracking engine for every published call.
-  * **Live Tracking:** Timestamps entry prices vs. current prices vs. benchmarks.
-  * **Post-Mortems:** Failed theses trigger structured post-mortems detailing *what diverged* and *how the process evolved*.
+  * **Live Tracking:** Timestamps entry prices against current prices and benchmarks.
+  * **Post-Mortems:** Failed theses trigger structured post-mortems detailing what diverged and how the process evolved.
   * **Risk Metrics:** Calculates portfolio-level **Sharpe (1.82)**, **Sortino (2.41)**, and **Max Drawdown (-8.4%)**.
-* **The Value:** Establishes a "Trust Moat." By turning errors into intellectual capital, the platform separates itself from 99% of ephemeral online research.
+* **The Value:** Establishes a "Trust Moat". By turning errors into intellectual capital, the platform separates itself from 99% of ephemeral online research.
 
 ### 3. 🤖 AI Research Companion (Proprietary RAG)
 * **Location:** `POST /api/agent/research`, `components/agent-panel.tsx`
 * **The Logic:** A floating analyst grounded exclusively in the published corpus.
   * **Pipeline:** User Query → `text-embedding-3-small` (1024 dims) → Pinecone Semantic Search → Ticker Extraction → Live Finnhub Price → **Claude 3.5 Sonnet**.
-  * **Constraint:** Zero hallucination policy. The agent uses mandatory inline citations `[N]`. If the research doesn't cover it, the agent admits it.
-* **The Value:** Turns a static archive into an interactive consultant. A reader can ask, *"What's the thesis on AWS margin expansion?"* and get a sourced answer in under 3 seconds.
+  * **Constraint:** Zero-hallucination policy. The agent uses mandatory inline citations `[N]`. If the research does not cover a topic, the agent admits it.
+* **The Value:** Turns a static archive into an interactive consultant. A reader can ask, *"What is the thesis on AWS margin expansion?"* and get a sourced answer in under three seconds.
 
 ### 4. 🎯 Portfolio Auditor (The Flagship Feature)
 * **Location:** `/auditor`, `POST /api/agent/audit`
-* **The Logic:** The platform’s highest-leverage tool. It cross-references user holdings against the firm’s internal convictions.
+* **The Logic:** The highest-leverage tool on the platform. It cross-references user holdings against the firm’s internal convictions.
   1. **Parallel Fetch:** Live Finnhub quotes for all tickers.
   2. **Semantic Mapping:** Embeds the portfolio and queries Pinecone for thematic conflicts.
-  3. **Entity Resolver:** Flags high-collision tickers (e.g., $SYM) for non-fundamental volatility risk.
-  4. **Output:** Streams a 4-section structured report: *Risk Summary, Conflict Alerts, Hidden Correlations, Actionable Pivots.*
+  3. **Entity Resolver:** Flags high-collision tickers (e.g. $SYM) for non-fundamental volatility risk.
+  4. **Output:** Streams a four-section structured report: *Risk Summary, Conflict Alerts, Hidden Correlations, and Actionable Pivots.*
 * **The Value:** Answers the critical question: *"Does my portfolio conflict with the Solo Strategist's worldview?"* It surfaces systemic risks that most retail investors never see.
 
 ---
@@ -65,20 +65,20 @@
 
 | Mechanism | Compounding Effect |
 | :--- | :--- |
-| **Research Archive** | Each article expands the Vector Index, making AI agents objectively "smarter" over time. |
-| **Track Record** | Time-in-market builds the statistical significance of the published Sharpe/Sortino ratios. |
-| **Post-Mortems** | Transparency during downturns builds institutional trust that marketing dollars cannot buy. |
-| **Access Control** | Edge-gating creates friction-based exclusivity, enabling scalable future monetization. |
+| **Research Archive** | Each article expands the Vector Index, making AI agents objectively smarter over time. |
+| **Track Record** | Time-in-market builds the statistical significance of the published Sharpe and Sortino ratios. |
+| **Post-Mortems** | Transparency during downturns builds institutional trust that marketing spend cannot buy. |
+| **Access Control** | Edge-gating creates friction-based exclusivity, enabling scalable future monetisation. |
 
 ---
 
 ## 🛡️ The Defensible Position
 
-What makes **The Solo Strategist** difficult to replicate isn't just the code—it's the **integration of accountability into the tech stack**. 
+What makes **The Solo Strategist** difficult to replicate is not just the code. It is the **integration of accountability into the tech stack**. 
 
-1. **Accountability by Design:** Automated price tracking prevents "cherry-picking" winners.
+1. **Accountability by Design:** Automated price tracking prevents cherry-picking winners.
 2. **Institutional Skepticism:** The Entity Resolver flags ticker collisions that retail tools ignore.
-3. **Proprietary Grounding:** The AI isn't a generic GPT wrapper; it is a digital twin of this specific analyst's methodology. 
+3. **Proprietary Grounding:** The AI is not a generic GPT wrapper; it is a digital twin of this specific analyst's methodology. 
 
 Every piece of content published makes every other feature more valuable.
 
